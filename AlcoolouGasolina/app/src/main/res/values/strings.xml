@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Álcool ou Gasolina</string>
+    <string name="label_botao_verificar">Verificar</string>
+</resources>
