@@ -58,7 +58,7 @@ public class FlappyBird extends ApplicationAdapter {
     private final float VIRTUAL_HEIGHT = 1024;
 
     //constantes
-    private static final int AUMENTO_VELOCIDADE_QUEDA = -15;
+    private static final int AUMENTO_VELOCIDADE_QUEDA = -13;
     private static final int POSICAO_INICIAL_X_PASSARO = 120;
     private static final int ESPACO_ENTRE_CANOS = 300;
     private static final int VELOCIDADE_ROLAGEM = 300;
