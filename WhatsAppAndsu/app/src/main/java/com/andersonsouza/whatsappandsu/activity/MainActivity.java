@@ -1,8 +1,9 @@
-package com.andersonsouza.whatsappandsu;
+package com.andersonsouza.whatsappandsu.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.andersonsouza.whatsappandsu.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
