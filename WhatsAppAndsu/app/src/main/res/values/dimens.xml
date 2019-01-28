@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <dimen name="largura_logo">200dp</dimen>
+    <dimen name="altura_logo">163dp</dimen>
+    <dimen name="largura_campo_numero">50dp</dimen>
+</resources>
