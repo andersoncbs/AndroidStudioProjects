@@ -2,14 +2,17 @@ package com.andersonsouza.whatsappandsu.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.andersonsouza.whatsappandsu.R;
+import com.andersonsouza.whatsappandsu.helper.Preferencias;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class LoginActivity extends AppCompatActivity {
@@ -59,6 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                 Integer numSorteado = random.nextInt(8999) + 1000;
                 String token = numSorteado.toString();
 
+                Preferencias preferencias = new Preferencias(getApplicationContext());
+
+                preferencias.salvarUsuarioPreferencias(nomeUsuario, telefoneSemFormatacao, token);
+
+                HashMap<String, String> dadosUsuario = preferencias.getDadosUsuario();
+                Log.i("###", dadosUsuario.get("token"));
             }
         });
     }
