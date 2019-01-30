@@ -2,6 +2,7 @@ package com.andersonsouza.whatsappandsu.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -71,4 +72,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public boolean enviarSMS(String telefone, String mensagem) {
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(telefone, null, mensagem, null, null);
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }
