@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         referenciaBD = ConfiguracaoFirebase.getFirebase();
-        referenciaBD.child("pontos").setValue(100);
+        referenciaBD.child("pontos").setValue(200);
     }
 
     public void abrirCadastroUsuario(View view) {
