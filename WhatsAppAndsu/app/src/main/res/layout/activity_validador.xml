@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="350dp"
+        android:layout_width="307dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="212dp"
@@ -31,13 +31,12 @@
         android:text="Você recebeum um SMS para validação do seu número,digite o código de vlaidação abaixo "
         android:textColor="@color/textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.822"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
+        android:id="@+id/editCodValidacao"
+        android:layout_width="127dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="292dp"
@@ -46,6 +45,8 @@
         android:ems="10"
         android:hint="Digite o código"
         android:inputType="number"
+        android:maxLength="4"
+        android:textAlignment="center"
         android:textColor="@color/textColorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -53,7 +54,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonValidar"
         android:layout_width="217dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
