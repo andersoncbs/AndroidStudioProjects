@@ -11,15 +11,15 @@ import com.google.firebase.database.DatabaseReference;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private DatabaseReference referenciaBD;
+//    private DatabaseReference referenciaBD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        referenciaBD = ConfiguracaoFirebase.getFirebase();
-        referenciaBD.child("pontos").setValue(200);
+//        referenciaBD = ConfiguracaoFirebase.getFirebase();
+//        referenciaBD.child("pontos").setValue(200);
     }
 
     public void abrirCadastroUsuario(View view) {
