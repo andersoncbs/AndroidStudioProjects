@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,26 +25,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        botaoSair = findViewById(R.id.buttonSair);
-
-        botaoSair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-                autenticacao.signOut();
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
 
         toobar = findViewById(R.id.toolbar);
         toobar.setTitle("Whats");
         setSupportActionBar(toobar);
 
-
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
     }
 
     @Override
@@ -53,4 +40,26 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemSair:
+                deslogarUsuario();
+                return true;
+            case R.id.itemConfiguracoes:
+                return true;
+            default: return  super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void deslogarUsuario() {
+        autenticacao.signOut();
+
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }

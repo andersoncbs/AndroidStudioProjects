@@ -3,7 +3,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/itemAdicionarUsuario"
+        android:icon="@drawable/ic_person_add"
+        android:orderInCategory="400"
+        android:title="Adicionar"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/itemProcurar"
+        android:icon="@drawable/ic_search"
+        android:orderInCategory="300"
+        android:title="Pesquisa"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/itemConfiguracoes"
         android:enabled="true"
         android:title="Configurações" />
-    <item android:title="Sair" />
+    <item
+        android:id="@+id/itemSair"
+        android:title="Sair" />
 </menu>
