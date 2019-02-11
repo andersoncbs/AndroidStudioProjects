@@ -1,5 +1,6 @@
 package com.andersonsouza.whatsappandsu.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.andersonsouza.whatsappandsu.R;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
+import com.andersonsouza.whatsappandsu.helper.Base64Custom;
 import com.andersonsouza.whatsappandsu.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,34 +63,40 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         ).addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(CadastroUsuarioActivity.this, "Usuário cadastrado.", Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(CadastroUsuarioActivity.this, "Usuário cadastrado.", Toast.LENGTH_SHORT).show();
 
-                            FirebaseUser user = task.getResult().getUser();
-                            usuario.setId(user.getUid());
-                            usuario.salvar();
+                    String identificador = Base64Custom.codificarBase64(usuario.getEmail());
 
-                            autenticacao.signOut();
-                            finish();
-                        } else {
-                            String mensagemErro = "";
-                            try {
-                                throw  task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                mensagemErro = "Digite uma senha mais forte, contendo letras e números!";
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-                                mensagemErro = "E-mail inválido!";
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                mensagemErro = "Usuário já existente!";
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                    usuario.setId(identificador);
+                    usuario.salvar();
 
-                            Toast.makeText(CadastroUsuarioActivity.this, mensagemErro, Toast.LENGTH_SHORT).show();
-                        }
+                    abrirLoginUsuario();
+                } else {
+                    String mensagemErro = "";
+                    try {
+                        throw  task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        mensagemErro = "Digite uma senha mais forte, contendo letras e números!";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        mensagemErro = "E-mail inválido!";
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        mensagemErro = "Usuário já existente!";
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+
+                    Toast.makeText(CadastroUsuarioActivity.this, mensagemErro, Toast.LENGTH_SHORT).show();
                 }
+                }
+            }
         );
+    }
+
+    public void abrirLoginUsuario() {
+        Intent intent = new Intent(CadastroUsuarioActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }
