@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.andersonsouza.whatsappandsu.R;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
 import com.andersonsouza.whatsappandsu.helper.Base64Custom;
+import com.andersonsouza.whatsappandsu.helper.Preferencias;
 import com.andersonsouza.whatsappandsu.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,6 +71,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
                     usuario.setId(identificador);
                     usuario.salvar();
+
+                    Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
+                    preferencias.salvarDados(identificador);
 
                     abrirLoginUsuario();
                 } else {
