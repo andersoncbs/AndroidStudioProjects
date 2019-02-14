@@ -17,19 +17,34 @@ public class Preferencias {
     private String CHAVE_FONE = "fone";
     private String CHAVE_TOKEN = "token";
 
+    private final String CHAVE_IDENTIFICADOR = "identificadorUsuarioLogado";
+
     public Preferencias(Context context) {
         this.context = context;
         sharedPreferences = context.getSharedPreferences(NOME_ARQUIVO, FILE_MODE);
         editor = sharedPreferences.edit();
     }
 
+    @Deprecated
     public void salvarUsuarioPreferencias(String nome, String telefone, String token) {
+        /*
         editor.putString(CHAVE_NOME, nome);
         editor.putString(CHAVE_FONE, telefone);
         editor.putString(CHAVE_TOKEN, token);
         editor.commit();
+        */
     }
 
+    public void salvarDados(String identificador) {
+        editor.putString(CHAVE_IDENTIFICADOR, identificador);
+        editor.commit();
+    }
+
+    public String getIdentificador() {
+        return sharedPreferences.getString(CHAVE_IDENTIFICADOR, null);
+    }
+
+    @Deprecated
     public HashMap<String, String> getDadosUsuario() {
         HashMap<String, String> dadosUsuario = new HashMap<>();
         dadosUsuario.put(CHAVE_NOME, sharedPreferences.getString(CHAVE_NOME, ""));

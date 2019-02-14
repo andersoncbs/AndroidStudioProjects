@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.andersonsouza.whatsappandsu.R;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
+import com.andersonsouza.whatsappandsu.helper.Base64Custom;
+import com.andersonsouza.whatsappandsu.helper.Preferencias;
 import com.andersonsouza.whatsappandsu.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -65,9 +68,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                        Preferencias preferencias = new Preferencias(LoginActivity.this);
+                        String identificadorUsuarioLogado = Base64Custom.codificarBase64(usuario.getEmail());
+                        preferencias.salvarDados(identificadorUsuarioLogado);
+
                         abrirTelaPrincipal();
                     } else {
-
+                        Toast.makeText(LoginActivity.this, "Erro ao fazer login!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
