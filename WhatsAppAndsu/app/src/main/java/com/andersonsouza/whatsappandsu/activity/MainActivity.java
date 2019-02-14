@@ -1,17 +1,20 @@
 package com.andersonsouza.whatsappandsu.activity;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import com.andersonsouza.whatsappandsu.R;
+import com.andersonsouza.whatsappandsu.adapter.TabAdapter;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
+import com.andersonsouza.whatsappandsu.helper.SlidingTabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,17 +23,27 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private Toolbar toobar;
 
+    private SlidingTabLayout slidingTabLayout;
+    private ViewPager viewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         toobar = findViewById(R.id.toolbar);
         toobar.setTitle("Whats");
         setSupportActionBar(toobar);
 
-        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        slidingTabLayout = findViewById(R.id.stl_tabs);
+        viewPager = findViewById(R.id.vp_pagina);
+        slidingTabLayout.setDistributeEvenly(true);
+        slidingTabLayout.setSelectedIndicatorColors(ContextCompat.getColor(this, R.color.colorAccent));
+
+        TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(tabAdapter);
+        slidingTabLayout.setViewPager(viewPager);
     }
 
     @Override
