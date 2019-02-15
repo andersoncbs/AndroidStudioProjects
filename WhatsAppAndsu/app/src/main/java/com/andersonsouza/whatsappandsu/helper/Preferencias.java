@@ -25,6 +25,15 @@ public class Preferencias {
         editor = sharedPreferences.edit();
     }
 
+    public void salvarDados(String identificador) {
+        editor.putString(CHAVE_IDENTIFICADOR, identificador);
+        editor.commit();
+    }
+
+    public String getIdentificador() {
+        return sharedPreferences.getString(CHAVE_IDENTIFICADOR, null);
+    }
+
     @Deprecated
     public void salvarUsuarioPreferencias(String nome, String telefone, String token) {
         /*
@@ -33,15 +42,6 @@ public class Preferencias {
         editor.putString(CHAVE_TOKEN, token);
         editor.commit();
         */
-    }
-
-    public void salvarDados(String identificador) {
-        editor.putString(CHAVE_IDENTIFICADOR, identificador);
-        editor.commit();
-    }
-
-    public String getIdentificador() {
-        return sharedPreferences.getString(CHAVE_IDENTIFICADOR, null);
     }
 
     @Deprecated
