@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.andersonsouza.whatsappandsu.R;
+import com.andersonsouza.whatsappandsu.adapter.ContatoAdapter;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
 import com.andersonsouza.whatsappandsu.helper.Preferencias;
 import com.andersonsouza.whatsappandsu.model.Contato;
@@ -28,8 +29,9 @@ public class ContatosFragment extends Fragment {
 
     private ListView listView;
     private ArrayAdapter adapter;
-    private ArrayList<String> contatos;
+    private ArrayList<Contato> contatos;
     private DatabaseReference firebase;
+    private ValueEventListener valueEventListenerContatos;
 
 
     public ContatosFragment() {
@@ -46,11 +48,15 @@ public class ContatosFragment extends Fragment {
 
         contatos = new ArrayList<>();
 
-        adapter = new ArrayAdapter(
-            getActivity(),
-            R.layout.lista_contato,
-            contatos
-        );
+        //adapter padrão
+//        adapter = new ArrayAdapter(
+//            getActivity(),
+//            R.layout.lista_contato,
+//            contatos
+//        );
+
+        //adapter customizado
+        adapter = new ContatoAdapter(getActivity(), contatos);
         listView.setAdapter(adapter);
 
         Preferencias preferencias = new Preferencias(getActivity());
@@ -60,7 +66,8 @@ public class ContatosFragment extends Fragment {
                         .child("contatos")
                         .child(identificadorUserLogado);
 
-        firebase.addValueEventListener(new ValueEventListener() {
+        //listener para recuperar contatos
+        valueEventListenerContatos = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //limpar lista
@@ -69,7 +76,7 @@ public class ContatosFragment extends Fragment {
                 //listar contatos
                 for (DataSnapshot dados: dataSnapshot.getChildren()) {
                     Contato contato = dados.getValue(Contato.class);
-                    contatos.add(contato.getNome());
+                    contatos.add(contato);
                 }
 
                 adapter.notifyDataSetChanged();
@@ -79,9 +86,22 @@ public class ContatosFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        };
+
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        firebase.addValueEventListener(valueEventListenerContatos);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        firebase.removeEventListener(valueEventListenerContatos);
     }
 
 }
