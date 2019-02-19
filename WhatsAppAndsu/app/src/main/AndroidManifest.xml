@@ -12,7 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.CadastroUsuarioActivity"></activity>
+        <activity android:name=".activity.ConversaActivity"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.andersonsouza.whatsappandsu.activity.MainActivity">
+            </meta-data>
+        </activity>
+        <activity android:name=".activity.CadastroUsuarioActivity" />
         <activity android:name=".activity.LoginActivityOld" />
         <activity android:name=".activity.ValidadorActivity" />
         <activity android:name=".activity.MainActivity" />
