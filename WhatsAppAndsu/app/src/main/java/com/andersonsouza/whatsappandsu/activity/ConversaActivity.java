@@ -10,13 +10,22 @@ public class ConversaActivity extends AppCompatActivity {
 
     private Toolbar toobar;
 
+    private String nomeUsuarioDest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversa);
 
         toobar = findViewById(R.id.tb_conversa);
-        toobar.setTitle("Usuário");
+
+        Bundle bundleExtra = getIntent().getExtras();
+
+        if (bundleExtra != null) {
+            nomeUsuarioDest = bundleExtra.getString("nome");
+        }
+
+        toobar.setTitle(nomeUsuarioDest);
         toobar.setNavigationIcon(R.drawable.ic_action_arrow_left);
         setSupportActionBar(toobar);
 
