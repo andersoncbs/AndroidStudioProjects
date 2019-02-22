@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -26,12 +26,15 @@
     <ListView
         android:id="@+id/lv_conversas"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:padding="8dp">
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:layout_below="@+id/tb_conversa"
+        android:layout_above="@+id/ll_mensagem">
 
     </ListView>
 
     <LinearLayout
+        android:id="@+id/ll_mensagem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -44,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Mensagem"
+            android:hint=""
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black" />
 
@@ -57,4 +60,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
