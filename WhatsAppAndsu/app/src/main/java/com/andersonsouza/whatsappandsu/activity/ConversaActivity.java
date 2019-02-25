@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.andersonsouza.whatsappandsu.R;
+import com.andersonsouza.whatsappandsu.adapter.MensagemAdapter;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
 import com.andersonsouza.whatsappandsu.helper.Base64Custom;
 import com.andersonsouza.whatsappandsu.helper.Preferencias;
@@ -32,8 +33,8 @@ public class ConversaActivity extends AppCompatActivity {
     private DatabaseReference firebase;
 
     private ListView listView;
-    private List<String> mensagens;
-    private ArrayAdapter adapter;
+    private List<Mensagem> mensagens;
+    private ArrayAdapter<Mensagem> adapter;
     private ValueEventListener valueEventListenerMensagens;
 
     //dados destinatário
@@ -71,9 +72,16 @@ public class ConversaActivity extends AppCompatActivity {
 
         //montar listview e adapter
         mensagens = new ArrayList<>();
+
+        /*
         adapter = new ArrayAdapter(ConversaActivity.this,
                 android.R.layout.simple_list_item_1,
                 mensagens);
+        */
+
+        //adapatador customizado
+        adapter = new MensagemAdapter(ConversaActivity.this, mensagens);
+
         listView.setAdapter(adapter);
 
         firebase = ConfiguracaoFirebase.getFirebase()
@@ -88,7 +96,7 @@ public class ConversaActivity extends AppCompatActivity {
 
                 for (DataSnapshot dados: dataSnapshot.getChildren()) {
                     Mensagem  mensagem = dados.getValue(Mensagem.class);
-                    mensagens.add(mensagem.getMensagem());
+                    mensagens.add(mensagem);
                 }
 
                 adapter.notifyDataSetChanged();
