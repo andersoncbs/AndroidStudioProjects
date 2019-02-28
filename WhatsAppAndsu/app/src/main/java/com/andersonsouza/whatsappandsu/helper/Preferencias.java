@@ -13,7 +13,7 @@ public class Preferencias {
     private int FILE_MODE = Context.MODE_PRIVATE;
     private SharedPreferences.Editor editor;
 
-    private String CHAVE_NOME = "nome";
+    private String CHAVE_NOME = "nomeUsuarioLogado";
     private String CHAVE_FONE = "fone";
     private String CHAVE_TOKEN = "token";
 
@@ -25,13 +25,18 @@ public class Preferencias {
         editor = sharedPreferences.edit();
     }
 
-    public void salvarDados(String identificador) {
+    public void salvarDados(String identificador, String nomeUsuario) {
         editor.putString(CHAVE_IDENTIFICADOR, identificador);
+        editor.putString(CHAVE_NOME, nomeUsuario);
         editor.commit();
     }
 
     public String getIdentificador() {
         return sharedPreferences.getString(CHAVE_IDENTIFICADOR, null);
+    }
+
+    public String getNome() {
+        return sharedPreferences.getString(CHAVE_NOME, null);
     }
 
     @Deprecated

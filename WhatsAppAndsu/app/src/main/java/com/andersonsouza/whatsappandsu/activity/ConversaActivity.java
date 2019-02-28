@@ -44,6 +44,7 @@ public class ConversaActivity extends AppCompatActivity {
 
     //dados remetente
     private String idUsuarioRementente;
+    private String nomeUsuarioRemetente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class ConversaActivity extends AppCompatActivity {
         //usuário logado
         Preferencias preferencias = new Preferencias(ConversaActivity.this);
         idUsuarioRementente = preferencias.getIdentificador();
+        nomeUsuarioRemetente = preferencias.getNome();
 
         Bundle bundleExtra = getIntent().getExtras();
 
@@ -152,10 +154,14 @@ public class ConversaActivity extends AppCompatActivity {
                         //salvar conversa p/ destinatário
                         Conversa conversa2 = new Conversa();
                         conversa2.setIdUsuario(idUsuarioRementente);
-//                        conversa2.setNome(nome);
+                        conversa2.setNome(nomeUsuarioRemetente);
                         conversa2.setMensagem(textoMensagem);
 
-                        salvarConversa(idUsuarioRementente, idUsuarioDest, conversa2);
+                        Boolean retornoConversaDestinatario = salvarConversa(idUsuarioDest, idUsuarioRementente, conversa2);
+                        if (!retornoConversaDestinatario) {
+                            Toast.makeText(ConversaActivity.this, "Erro ao salvar conversa do destinatário, tente novamente.",
+                                    Toast.LENGTH_LONG).show();
+                        }
                     }
 
 
@@ -196,6 +202,9 @@ public class ConversaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sobrescreve  sempre a última mensagem trocada (não usa o push).
+     */
     private boolean salvarConversa(String idRemetente, String idDestinatario, Conversa conversa) {
         try {
             firebase = ConfiguracaoFirebase.getFirebase().child("conversas");
