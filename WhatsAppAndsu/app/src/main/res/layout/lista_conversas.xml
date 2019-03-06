@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_nome"
+        android:id="@+id/tv_titulo"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textColor="@android:color/black"
@@ -14,10 +14,10 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:text="Nome Sobrenome"
-    />
+        />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/tv_email"
+        android:id="@+id/tv_subtitulo"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:textColor="@android:color/darker_gray"
@@ -28,15 +28,3 @@
         android:text="mail@mail.com"
         />
 </LinearLayout>
-
-
-<!--
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-</android.support.constraint.ConstraintLayout>
--->
-
-
