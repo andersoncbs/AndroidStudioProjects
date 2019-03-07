@@ -14,11 +14,10 @@ import android.widget.ListView;
 
 import com.andersonsouza.whatsappandsu.R;
 import com.andersonsouza.whatsappandsu.activity.ConversaActivity;
-import com.andersonsouza.whatsappandsu.adapter.ContatoAdapter;
 import com.andersonsouza.whatsappandsu.adapter.ConversaAdapter;
 import com.andersonsouza.whatsappandsu.config.ConfiguracaoFirebase;
+import com.andersonsouza.whatsappandsu.helper.Base64Custom;
 import com.andersonsouza.whatsappandsu.helper.Preferencias;
-import com.andersonsouza.whatsappandsu.model.Contato;
 import com.andersonsouza.whatsappandsu.model.Conversa;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -85,16 +84,20 @@ public class ConversasFragment extends Fragment {
             }
         };
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(getActivity(), ConversaActivity.class);
-//                Conversa conversa = conversas.get(position);
-//                intent.putExtra("nome", contato.getNome());
-//                intent.putExtra("email", contato.getEmail());
-//                startActivity(intent);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Conversa conversa = conversas.get(position);
+
+                Intent intent = new Intent(getActivity(), ConversaActivity.class);
+                intent.putExtra("nome", conversa.getNome());
+
+                String email = Base64Custom.decodificarBase64(conversa.getIdUsuario());
+                intent.putExtra("email", email);
+
+                startActivity(intent);
+            }
+        });
 
 
         return view;
